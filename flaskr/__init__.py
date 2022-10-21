@@ -1,9 +1,10 @@
 import os
+from typing import Mapping
 
 from flask import Flask
 
 
-def create_app(test_config=None):
+def create_app(test_config: Mapping=None) -> Flask:
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
@@ -31,7 +32,7 @@ def create_app(test_config=None):
     app.register_blueprint(auth.bp)
     # a simple page that says hello
     @app.route('/hello')
-    def hello():
+    def hello() -> str:
         return 'Hello, World!'
 
     return app
