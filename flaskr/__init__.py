@@ -28,9 +28,16 @@ def create_app(test_config: Mapping=None) -> Flask:
     from . import db
     db.init_app(app)
 
+    # router auth
     from . import auth
     app.register_blueprint(auth.bp)
-    # a simple page that says hello
+   
+    # router blog
+    from . import blog
+    app.register_blueprint(blog.bp)
+    app.add_url_rule('/', endpoint='index')
+
+    # router hello (test)
     @app.route('/hello')
     def hello() -> str:
         return 'Hello, World!'
